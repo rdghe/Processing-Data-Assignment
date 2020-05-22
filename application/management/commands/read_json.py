@@ -1,15 +1,26 @@
-from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
-from django.utils.crypto import get_random_string
+import json
 
 
 class Command(BaseCommand):
-    help = 'Create random users'
+    help = 'Read Json File'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def add_arguments(self, parser):
-        parser.add_argument('total', type=int, help='Indicates the number of users to be created')
+        parser.add_argument('file_name', type=str, help='Indicates the file name')
 
     def handle(self, *args, **kwargs):
-        total = kwargs['total']
-        for i in range(total):
-            User.objects.create_user(username=get_random_string(), email='', password='123')
+        file_name = kwargs['file_name']
+        location = 'Sample Input Files/' + file_name + '.json'
+        with open(location) as f:
+            data = json.load(f)
+        print(len(data))
+        # print(data)
+        for i in range(len(data)):
+            # keys = data[i].keys()
+            for key, value in data[i].items():
+                print(key, value)
+
+
