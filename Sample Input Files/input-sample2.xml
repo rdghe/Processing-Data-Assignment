@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abitmorecomplicateddata>
+  <strangeTag thisIsDate="true" dataNumberedID="0000001">
+    <message>This is a string of text</message>
+    <numberOfEggs>12</numberOfEggs>
+    <postalCode>1123 GH</postalCode>
+    <url dateAndTime="2014-09-07T15:11:40Z">http://orange.co.uk/</url>
+    <sortingField name="this is the string">true</sortingField>
+  </strangeTag>
+  <strangerTag thisIsDate="true" dataNumberedID="0000002">
+    <message>This is a string of text but with extra text</message>
+    <numberOfEggs>999</numberOfEggs>
+    <postalCode>9876 AC</postalCode>
+    <url dateAndTime="2014-09-07T15:21:40Z">http://pear.co.uk/</url>
+    <sortingField name="this is the string for 2">true</sortingField>
+  </strangerTag>
+  <strangestTag thisIsDate="true" dataNumberedID="0000003">
+    <message>This is a string</message>
+    <numberOfEggs>3245</numberOfEggs>
+    <postalCode>1222XX</postalCode>
+    <url dateAndTime="2014-08-07T15:41:40Z">http://banana.co.uk/</url>
+    <sortingField name="this is the string for 3">true</sortingField>
+  </strangestTag>
+  <anotherTagWithNoBodyOrChildren skipThisOne="true"></anotherTagWithNoBodyOrChildren>
+  <anotherTagWithNoBodyOrChildren skipThisOne="true"></anotherTagWithNoBodyOrChildren>
+</abitmorecomplicateddata>
