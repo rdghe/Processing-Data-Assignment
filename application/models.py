@@ -5,7 +5,7 @@ from django.core.validators import RegexValidator
 
 class MappedSource(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    url = models.URLField
+    url = models.URLField()
     account = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
 
 

@@ -17,9 +17,7 @@ class Command(BaseCommand):
         with open(location) as f:
             data = json.load(f)
         print(len(data))
-        # print(data)
         for i in range(len(data)):
-            # keys = data[i].keys()
             for key, value in data[i].items():
                 print(key, value)
 

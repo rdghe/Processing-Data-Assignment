@@ -1,5 +1,11 @@
+import xmltodict
+import json
 from django.core.management.base import BaseCommand
 from xml.dom import minidom
+
+
+def to_dict(input_ordered_dict):
+    return json.loads(json.dumps(input_ordered_dict))
 
 
 class Command(BaseCommand):
@@ -15,11 +21,10 @@ class Command(BaseCommand):
         file_name = kwargs['file_name']
         location = 'Sample Input Files/' + file_name + '.xml'
 
-        xml_doc = minidom.parse(location)
-        item_list = xml_doc.getElementsByTagName('String0')
-        print(item_list)
-        # print(item_list[0].attributes['string0'].value)
-        # for s in item_list:
-        #     print(s.attributes['name'].value)
+        with open(location) as f:
+            data = xmltodict.parse(f.read())
+            json.dumps(data)
+            data = to_dict(data)
+            print(data)
 
 
