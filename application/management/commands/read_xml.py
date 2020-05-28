@@ -9,7 +9,7 @@ def to_dict(input_ordered_dict):
 
 
 class Command(BaseCommand):
-    help = 'Read Json File'
+    help = 'Read XML File'
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -26,5 +26,8 @@ class Command(BaseCommand):
             json.dumps(data)
             data = to_dict(data)
             print(data)
+            for i in range(len(data)):
+                for key, value in data[i].items():
+                    print(key, value)
 
 
