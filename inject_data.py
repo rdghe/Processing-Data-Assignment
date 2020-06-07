@@ -1,6 +1,8 @@
 import threading
 import json
+import redis
 from faker import Faker
+from rejson import Client, Path
 
 
 def create_data():
@@ -38,10 +40,13 @@ def inject_data():
     # i as interval in seconds
     n = 10
     threading.Timer(n, inject_data).start()
+
     # gets executed every n seconds
     strings = create_data()
     item = create_json(strings)
-    print_data(item)
+    # create redis queue and store data
+    r = redis.StrictRedis('localhost', 6379)
+    r.execute_command('JSON.SET', 'object', '.', json.dumps(item))
 
 
 def main():
@@ -50,3 +55,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
