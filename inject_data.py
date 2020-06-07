@@ -38,7 +38,7 @@ def create_json(strings):
 
 def inject_data():
     # i as interval in seconds
-    n = 10
+    n = 5
     threading.Timer(n, inject_data).start()
 
     # gets executed every n seconds
@@ -46,6 +46,7 @@ def inject_data():
     item = create_json(strings)
     # create redis queue and store data
     r = redis.StrictRedis('localhost', 6379)
+    print_data(item)
     r.execute_command('JSON.SET', 'object', '.', json.dumps(item))
 
 
