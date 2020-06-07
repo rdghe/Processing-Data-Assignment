@@ -18,7 +18,13 @@ class Data:
         self.string = string
         self.integer = integer
         self.id_string = id_string
-        self.grade = 'F'
+        self.grade = 'A'
+
+    def grade_if_missing(self):
+        if not (self.url and self.date_time and self.postal_code):
+            self.grade = 'F'
+        if not (self.category and self.string and self.integer):
+            self.grade = 'B'
 
     def validate_url(self):
         val = URLValidator(verify_exists=False)
@@ -26,6 +32,7 @@ class Data:
             val(self.url)
         except ValidationError as e:
             print(e)
+            self.grade = 'D'
 
     def validate_date_time(self):
         r = re.compile('^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\+\d{2}')
@@ -33,13 +40,14 @@ class Data:
             print('Not a date and/or time')
 
     def print_data(self):
-        print(self.url)
-        print(self.date_time)
-        print(self.category)
-        print(self.postal_code)
-        print(self.string)
-        print(self.integer)
-        print(self.id_string)
+        print('String0: ' + str(self.url))
+        print('String1: ' + str(self.date_time))
+        print('String2: ' + str(self.category))
+        print('String3: ' + str(self.postal_code))
+        print('String4: ' + str(self.string))
+        print('String5: ' + str(self.integer))
+        print('String6 ' + str(self.id_string))
+        print('Grade: ' + str(self.grade))
 
 
 def to_dict(input_ordered_dict):
@@ -79,7 +87,9 @@ def validate_and_grade(data):
     string = list(data.values())[4]
     integer = list(data.values())[5]
     id_string = list(data.values())[6]
+
     data_item = Data(url, date_time, category, postal_code, string, integer, id_string)
+    data_item.grade_if_missing()
     data_item.print_data()
 
 
