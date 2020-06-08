@@ -45,9 +45,10 @@ def inject_data():
     strings = create_data()
     item = create_json(strings)
     # create redis queue and store data
-    r = redis.StrictRedis('localhost', 6379)
-    print_data(item)
-    r.execute_command('JSON.SET', 'object', '.', json.dumps(item))
+    grading_queue = redis.StrictRedis('localhost', 6379)
+    # print_data(item)
+    key = strings[6]
+    grading_queue.execute_command('JSON.SET', key, '.', json.dumps(item))
 
 
 def main():

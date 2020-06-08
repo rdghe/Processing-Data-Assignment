@@ -2,6 +2,7 @@ import threading
 import json
 import redis
 import re
+import math
 from dateutil.parser import parse
 from rejson import Client, Path
 
@@ -57,7 +58,6 @@ def validate_postcode(data):
 
 
 def validate_string(data):
-    print(data)
     if not data:
         return 'B'
     if isinstance(data, str) and 4 < len(data) < 51:
@@ -66,16 +66,40 @@ def validate_string(data):
         return 'B'
 
 
-def check_data(data):
+def validate_integer(data):
+    if not data:
+        return 'B'
+    frac, whole = math.modf(data)
+    if isinstance(data, int) or (isinstance(data, float) and frac == 0):
+        return 'A'
+    else:
+        return 'B'
+
+
+def compute_grade(grades):
+    if 'F' in grades:
+        return 'F'
+    elif 'D' in grades:
+        return 'D'
+    elif 'C' in grades:
+        return 'C'
+    elif 'B' in grades:
+        return 'B'
+    else:
+        return 'A'
+
+
+def grade_data(data):
     string0_grade = validate_url(data['String0'])
     string1_grade = validate_date_time(data['String1'])
     string2_grade = validate_category(data['String2'])
     string3_grade = validate_postcode(data['String3'])
     string4_grade = validate_string(data['String4'])
-
-    grades = [string0_grade, string1_grade, string2_grade, string3_grade, string4_grade]
-    print(grades)
-
+    string5_grade = validate_integer(data['String5'])
+    grades = [string0_grade, string1_grade, string2_grade, string3_grade, string4_grade, string5_grade]
+    grade = compute_grade(grades)
+    data['grades'] = grades
+    return data
 
 
 def retrieve_and_check():
@@ -84,12 +108,18 @@ def retrieve_and_check():
     threading.Timer(n, retrieve_and_check).start()
 
     # gets executed every n seconds
-    # retrieve data from redis and print it
-    r = redis.StrictRedis('localhost', 6379)
-    item = json.loads(r.execute_command('JSON.GET', 'object'))
-
-    print_data(item)
-    # check_data(item)
+    # retrieve a RANDOM data point from the redis queue
+    grading_queue = redis.StrictRedis('localhost', 6379)
+    key = grading_queue.randomkey()
+    item = json.loads(grading_queue.execute_command('JSON.GET', key))
+    # print_data(item)
+    item = grade_data(item)
+    # delete item from redis queue
+    grading_queue.execute_command('JSON.DEL', key)
+    # print_data(item)
+    # forward item to de-duplication queue
+    dedup_queue = redis.StrictRedis('localhost', 6380)
+    dedup_queue.execute_command('JSON.SET', key, '.', json.dumps(item))
 
 
 def main():
