@@ -2,6 +2,7 @@ import threading
 import json
 import redis
 from faker import Faker
+from datetime import datetime
 from rejson import Client, Path
 
 
@@ -30,7 +31,8 @@ def create_json(strings):
             'String3': strings[3],
             'String4': strings[4],
             'String5': strings[5],
-            'String6': strings[6]}
+            'String6': strings[6],
+            'created': datetime.now().strftime("%d/%m/%Y %H:%M:%S")}
     json_item = json.dumps(item)
     data = json.loads(json_item)
     return data
@@ -38,15 +40,18 @@ def create_json(strings):
 
 def inject_data():
     # i as interval in seconds
-    n = 10
+    n = 5
     threading.Timer(n, inject_data).start()
 
     # gets executed every n seconds
     strings = create_data()
     item = create_json(strings)
+
     # create redis queue and store data
-    r = redis.StrictRedis('localhost', 6379)
-    r.execute_command('JSON.SET', 'object', '.', json.dumps(item))
+    grading_queue = redis.StrictRedis('localhost', 6379)
+    # print_data(item)
+    key = strings[6]
+    grading_queue.execute_command('JSON.SET', key, '.', json.dumps(item))
 
 
 def main():
