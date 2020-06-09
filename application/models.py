@@ -26,7 +26,7 @@ class SyncData(models.Model):
     dataString1 = models.DateTimeField()
     dataString2 = models.TextField(blank=True)
     dataString3 = models.CharField(max_length=255, validators=
-                                   [RegexValidator('/[0-9][ ]*[0-9][ ]*[0-9][ ]*[0-9][ ]*[A-Za-z][ ]*[A-Za-z]/')],)
+                                   [RegexValidator('[0-9][ ]*[0-9][ ]*[0-9][ ]*[0-9][ ]*[A-Za-z][ ]*[A-Za-z]')],)
     dataString4 = models.CharField(blank=True, max_length=40)
     dataString5 = models.IntegerField(blank=True)
     # syncItem = models.ForeignKey(models.SyncItem)
