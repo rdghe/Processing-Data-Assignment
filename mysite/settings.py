@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'processing_data',
-        'USER': 'admin',
-        'PASSWORD': 'admin',
+        'NAME': 'postgres_database',
+        'USER': 'postgres_user',
+        'PASSWORD': 'postgres_password',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -112,11 +112,13 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
+DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
+
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

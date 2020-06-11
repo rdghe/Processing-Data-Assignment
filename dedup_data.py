@@ -34,7 +34,7 @@ def deduplicate_data(key, item):
     dedup_queue = redis.StrictRedis('localhost', 6380)
     exists = dedup_queue.execute_command('EXISTS', key)
     if exists > 0:
-        print('Extracting item from queue.')
+        print('Extracting item from queue. De-duplicating..')
         old_item = json.loads(dedup_queue.execute_command('JSON.GET', key))
         merge_data(key, item, old_item)
     else:
