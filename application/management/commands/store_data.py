@@ -25,6 +25,11 @@ class Command(BaseCommand):
                 print('No more items in queue')
                 return  # set as 'continue' for continuous running
             item = json.loads(queue.execute_command('JSON.GET', key))
+            if None in item.values():
+                # TODO POISON QUEUE TO BE IMPLEMENTED HERE
+                print('Bad item. Discarding..')
+                queue.execute_command('JSON.DEL', key)
+                continue
             print('Key ' + str(key) + ' extracted from Redis queue')
 
             print('Creating SyncItem')
