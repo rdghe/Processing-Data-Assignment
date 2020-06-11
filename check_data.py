@@ -112,8 +112,10 @@ def retrieve_and_check():
     # retrieve a RANDOM data point from the redis queue
     grading_queue = redis.StrictRedis('localhost', 6379)
     key = grading_queue.randomkey()
+    if key is None:
+        print('Pre-processing queue is empty.')
+        return
     item = json.loads(grading_queue.execute_command('JSON.GET', key))
-    # print_data(item)
     item = grade_data(item)
     if item['grades'] == ['A', 'A', 'A', 'A', 'A', 'A']:
         item['status'] = 1
@@ -133,9 +135,10 @@ def main():
 
     item0_missingurl = json.loads(
         "{\"String0\": null, \"String1\":\"08\\/19\\/1990, 03:54:15\",\"String2\":\"magnam\",\"String3\":\"8898CH\",\"String4\":\"Ullam nam corporis iusto.\",\"String5\":8560,\"String6\":\"ec72ba0b-948a-446d-aed9-9cd2eab9011d\",\"grades\":[\"F\",\"A\",\"A\",\"A\",\"A\",\"A\"]}")
+
     dedup_queue = redis.StrictRedis('localhost', 6380)
-    #dedup_data.deduplicate_data(key, item0_missingdate)
-    #dedup_queue.execute_command('JSON.SET', key, '.', json.dumps(item0_missingurl))
+    # dedup_data.deduplicate_data(key, item0_missingdate)
+    # dedup_queue.execute_command('JSON.SET', key, '.', json.dumps(item0_missingurl))
 
     retrieve_and_check()
 
