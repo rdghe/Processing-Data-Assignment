@@ -9,3 +9,10 @@ List of python commands with their respective effects:
 * manage.py read_json "file_name" : reads the json file and outputs the formatted data 
 
 * manage.py read_xml "file_name" : reads the xml file and outputs the formatted data 
+
+
+
+DJANGO superuser details:
+* user: admin
+* email: admin@email.com	
+* password: admin

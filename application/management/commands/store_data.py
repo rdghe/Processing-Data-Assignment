@@ -23,7 +23,7 @@ class Command(BaseCommand):
             key = queue.randomkey()
             if key is None:
                 print('No more items in queue')
-                continue
+                return  # set as 'continue' for continuous running
             item = json.loads(queue.execute_command('JSON.GET', key))
             print('Key ' + str(key) + ' extracted from Redis queue')
 
@@ -41,6 +41,6 @@ class Command(BaseCommand):
                                                           created=data['created'], dataString0=data['String0'],
                                                           dataString1=data['String1'], dataString2=data['String2'],
                                                           dataString3=data['String3'], dataString4=data['String4'],
-                                                          dataString5=data['String5'], syncItem=data)
+                                                          dataString5=data['String5'], syncItem=sync_item)
             print('Deleting item from queue')
             queue.execute_command('JSON.DEL', key)
