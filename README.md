@@ -5,7 +5,7 @@ This represents a project given as a job application assignment by Adivare BV.
 ### Prerequisites for running the application
 
 ##### Packages
-- Run **pip install requirements.txt** to install all the necessary packages
+- Run **pip install -r requirements.txt** to install all the necessary packages
 
 ##### Docker containers with respective commands:
 
