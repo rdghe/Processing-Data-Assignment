@@ -4,6 +4,9 @@ This represents a project given as a job application assignment by Adivare BV.
 
 ### Prerequisites for running the application
 
+##### Packages
+- Run *pip install requirements.txt* to install all the necessary packages
+
 ##### Docker containers with respective commands:
 
 1. *redis queue #1:* 
