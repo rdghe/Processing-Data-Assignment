@@ -44,12 +44,16 @@ This represents a project given as a job application assignment by Adivare BV.
     
 ##### Django management commands (run as **python manage.py -command- **)
 
-1.  **store_data**
+1.  **makemigrations**
+
+2.  **migrate**
+
+3.  **store_data**
     - reads data from Redis Queue #2
     - creates the models (while validating the data once again at the same time)
     - stores them in the PostgreSQL Database
 
-2. **createsuperuser**
+4. **createsuperuser**
     - required in order to get admin privileges
 
 ##### Web Interface
