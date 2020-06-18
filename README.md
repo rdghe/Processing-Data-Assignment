@@ -49,6 +49,24 @@ This represents a project given as a job application assignment by Adivare BV.
     - creates the models (while validating the data once again at the same time)
     - stores them in the PostgreSQL Database
 
+2. **createsuperuser**
+    - required in order to get admin privileges
+
+##### Web Interface
+
+1. **http://localhost:8000/admin/**
+    - The Database Models are present here
+    - Upon clicking on one of them, the user is greeted with the list of database entries of that model
+    - The entry can be modified or deleted
+
+2. **http://localhost:8000/grading_queue/**
+    - Displays the items currently in the Grading Queue as HTML tables
+
+3. **http://localhost:8000/dedup_queue/**
+    - Displays the items currently in the De-duplication Queue as HTML tables
+
+4. **http://localhost:8000/poison_queue/**
+    - Displays the items currently in the Poison Queue as HTML tables
 
 ##### Miscellaneous Django management commands with their respective effects:
 
@@ -58,10 +76,6 @@ This represents a project given as a job application assignment by Adivare BV.
 
 * manage.py read_xml "file_name" : reads the xml file and outputs the formatted data 
 
-##### Django superuser details:
-* user: admin
-* email: admin@email.com	
-* password: admin
 
 ##### PostgreSQL admin user details:
 * user: postgres_user
