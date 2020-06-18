@@ -26,8 +26,10 @@ class Command(BaseCommand):
                 return  # set as 'continue' for continuous running
             item = json.loads(queue.execute_command('JSON.GET', key))
             if None in item.values():
-                # TODO POISON QUEUE TO BE IMPLEMENTED HERE
                 print('Bad item. Discarding..')
+                poison_queue = redis.StrictRedis('localhost', 6381)
+                poison_queue.execute_command('JSON.SET', key, '.', json.dumps(item))
+                # delete item from the de-dup queue after storing in the poison queue
                 queue.execute_command('JSON.DEL', key)
                 continue
             print('Key ' + str(key) + ' extracted from Redis queue')

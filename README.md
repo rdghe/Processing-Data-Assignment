@@ -17,6 +17,10 @@ This represents a project given as a job application assignment by Adivare BV.
 
     docker run -d -p 6380:6379 --name redis-redisjson2 redislabs/rejson:latest
 
+3. **redis queue #3:**
+
+    docker run -d -p 6381:6379 --name redis-redisjson3 redislabs/rejson:latest
+
 3. **PostgreSQL database:** 
 
     docker run -p 5432:5432 -e POSTGRES_DB=postgres_database -e POSTGRES_USER=postgres_user -e POSTGRES_PASSWORD=postgres_password -d postgres
