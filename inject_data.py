@@ -68,7 +68,6 @@ def inject_data():
     else:
         strings = create_data()
     item = create_json(strings)
-    print_data(item)
     # create redis queue and store data
     grading_queue = redis.StrictRedis('localhost', 6379)
     key = strings[6]

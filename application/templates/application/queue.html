@@ -1,0 +1,12 @@
+{% if item_list %}
+    {% autoescape off %}
+    <ul>
+    {% for item in item_list %}
+{#        <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>#}
+        <div class="table_element" style="padding: 10px"> {{ item }} </div>
+    {% endfor %}
+    </ul>
+    {% endautoescape %}
+{% else %}
+    <p>No items in Queue.</p>
+{% endif %}

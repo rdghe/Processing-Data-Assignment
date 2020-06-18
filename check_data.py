@@ -129,20 +129,6 @@ def retrieve_and_check():
 
 
 def main():
-    key = "ec72ba0b-948a-446d-aed9-9cd2eab9011d"
-    item0_missingdate = json.loads(
-        "{\"String0\":\"http:\\/\\/www.heijmans.org\\/login\\/\",\"String1\":null, \"String2\":\"magnam\",\"String3\":\"8898CH\",\"String4\":\"Ullam nam corporis iusto.\",\"String5\":8560,\"String6\":\"ec72ba0b-948a-446d-aed9-9cd2eab9011d\",\"grades\":[\"A\",\"F\",\"A\",\"A\",\"A\",\"A\"]}")
-
-    item0_missingurl = json.loads(
-        "{\"String0\": null, \"String1\":\"08\\/19\\/1990, 03:54:15\",\"String2\":\"magnam\",\"String3\":\"8898CH\",\"String4\":\"Ullam nam corporis iusto.\",\"String5\":8560,\"String6\":\"ec72ba0b-948a-446d-aed9-9cd2eab9011d\",\"grades\":[\"F\",\"A\",\"A\",\"A\",\"A\",\"A\"]}")
-
-    item0_missingdate['status'] = 0
-    item0_missingurl['status'] = 0
-
-    # dedup_queue = redis.StrictRedis('localhost', 6380)
-    # dedup_queue.execute_command('JSON.SET', key, '.', json.dumps(item0_missingurl))
-    # dedup_data.deduplicate_data(key, item0_missingdate)
-
     retrieve_and_check()
 
 
