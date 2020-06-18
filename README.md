@@ -5,7 +5,7 @@ This represents a project given as a job application assignment by Adivare BV.
 ### Prerequisites for running the application
 
 ##### Packages
-- Run **pip install requirements.txt** to install all the necessary packages
+- Run **pip install -r requirements.txt** to install all the necessary packages
 
 ##### Docker containers with respective commands:
 
@@ -44,9 +44,9 @@ This represents a project given as a job application assignment by Adivare BV.
     
 ##### Django management commands (run as **python manage.py -command- **)
 
-1.  **makemigrations**
+1. **makemigrations**
 
-2.  **migrate**
+2. **migrate**
 
 3.  **store_data**
     - reads data from Redis Queue #2
